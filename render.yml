@@ -1,0 +1,32 @@
+services:
+  # Single service running BOTH the Flask web app and the Telegram bot,
+  # so they can share the same persistent disk / SQLite database.
+  - type: web
+    name: activation-system
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: bash start.sh
+    disk:
+      name: activation-data
+      mountPath: /opt/render/project/src/database
+      sizeGB: 1
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: ADMIN_TELEGRAM_ID
+        sync: false
+      - key: DOMAIN
+        sync: false
+      - key: TOKEN_EXPIRY_SECONDS
+        value: "3600"
+      - key: DATABASE_PATH
+        value: database/activation.db
+      - key: FLASK_HOST
+        value: 0.0.0.0
+      - key: DEBUG
+        value: "false"
+      - key: SERVICE_NAME
+        value: My Premium Service
+      - key: PYTHON_VERSION
+        value: 3.11.9
