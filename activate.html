@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Service Activation</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="wrapper">
+    <div class="card">
+      <div class="icon">🔐</div>
+      <h1>Service Activation</h1>
+      <p class="subtitle">Your activation link is ready.</p>
+
+      <div class="info-box">
+        <div class="info-row">
+          <span class="label">Service</span>
+          <span class="value">{{ service_name }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Status</span>
+          <span class="value status-ready">Ready to activate</span>
+        </div>
+      </div>
+
+      <form id="activate-form" method="POST" action="{{ url_for('activate_submit', token=token) }}">
+        <button type="submit" id="activate-btn" class="btn-primary">
+          🚀 Activate Now
+        </button>
+      </form>
+
+      <p class="footnote">This link can only be used once and will expire automatically.</p>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
