@@ -3,6 +3,7 @@ app.py
 Flask web server for the activation link system.
 
 Routes:
+    GET/HEAD /              -> health check (for Render / uptime monitors)
     GET  /activate/<token>   -> shows activate / expired / invalid / used page
     POST /activate/<token>   -> performs the actual activation (one-time)
     GET  /success/<id>       -> confirmation screen
@@ -43,6 +44,14 @@ def _client_ip() -> str:
     if forwarded:
         return forwarded.split(",")[0].strip()
     return request.remote_addr or "unknown"
+
+
+@app.route("/", methods=["GET", "HEAD"])
+def health_check():
+    # Simple 200 OK so Render's health check (and any uptime monitor)
+    # sees the service as healthy. Real activation links live at
+    # /activate/<token>.
+    return "Activation system is running.", 200
 
 
 @app.route("/activate/<token>", methods=["GET"])
@@ -125,3 +134,4 @@ if __name__ == "__main__":
     database.init_db()
     logger.info("Database ready at %s", config.DATABASE_PATH)
     app.run(host=config.FLASK_HOST, port=config.FLASK_PORT, debug=config.DEBUG)
+
