@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activation Successful</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="wrapper">
+    <div class="card">
+      <div class="icon success">🎉</div>
+      <h1>Activation Successful</h1>
+      <p class="subtitle">Your service has been activated successfully.</p>
+
+      <div class="info-box">
+        <div class="info-row">
+          <span class="label">Service</span>
+          <span class="value">{{ service_name }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Activation ID</span>
+          <span class="value mono">{{ activation_id }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Status</span>
+          <span class="value status-ready">Active</span>
+        </div>
+      </div>
+
+      <p class="footnote">You can close this page now.</p>
+    </div>
+  </div>
+</body>
+</html>
